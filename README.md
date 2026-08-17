@@ -19,7 +19,7 @@
 
 ![CUK AI Innovation cover](./가톨릭대_ai_cuk_혁신대회/docs/images/slide-cover-01.png)
 
-![CUK AI Innovation award](./가톨릭대_ai_cuk_혁신대회/docs/images/award-certificate.png)
+
 
 ### Key Points
 
