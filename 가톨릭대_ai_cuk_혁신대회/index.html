@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가톨릭공유대학 (CU12) 통합 포털</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Inter & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        catholicNavy: '#0A2540',
+                        catholicBlue: '#004B87',
+                        catholicGold: '#D4AF37',
+                        catholicAmber: '#B8860B',
+                        slateBG: '#F8FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and smooth transitions */
+        html {
+            scroll-behavior: smooth;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slateBG text-slate-800 font-sans min-h-screen flex flex-col selection:bg-catholicBlue selection:text-white">
+
+    <!-- ==========================================
+         HEADER (GNB)
+         ========================================== -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 transition-all-300 shadow-sm">
+        <!-- Top Utility Bar (Desktop Only) -->
+        <div class="bg-slate-100 text-xs text-slate-600 border-b border-slate-200/60 py-2 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="font-semibold text-catholicBlue"><i class="fa-solid fa-graduation-cap mr-1"></i> 가톨릭 12개 대학 연합 메타버시티</span>
+                    <span class="hidden md:inline text-slate-400">|</span>
+                    <span class="hidden md:inline"><i class="fa-solid fa-bullhorn mr-1"></i> [안내] 2026학년도 하계 계절학기 수강신청 진행중</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" onclick="openLoginModal()" class="hover:text-catholicBlue transition-colors font-medium"><i class="fa-solid fa-lock mr-1"></i> 로그인 (Sign In)</a>
+                    <span class="text-slate-300">|</span>
+                    <div class="relative inline-block text-left group">
+                        <button class="hover:text-catholicBlue transition-colors flex items-center space-x-1 font-medium">
+                            <span><i class="fa-solid fa-globe mr-1"></i> 한국어</span>
+                            <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                        </button>
+                        <div class="absolute right-0 w-28 bg-white border border-slate-200 rounded-md shadow-lg py-1 mt-1 hidden group-hover:block transition-all duration-200 z-50">
+                            <a href="#" class="block px-4 py-2 hover:bg-slate-100 text-slate-700">한국어</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-slate-100 text-slate-700">English</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main GNB Bar -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center space-x-3 group">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-catholicNavy to-catholicBlue flex items-center justify-center text-white shadow-md shadow-blue-900/20 group-hover:scale-105 transition-all duration-300">
+                            <span class="font-extrabold text-lg tracking-tighter">CU12</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-black text-xl text-catholicNavy tracking-tight leading-none">가톨릭공유대학</span>
+                            <span class="text-[10px] text-slate-400 font-bold tracking-widest mt-0.5">CATHOLIC METAVERSITY</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex space-x-8 xl:space-x-10 h-full items-center">
+                    <!-- Menu 1: 소개 -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-700 hover:text-catholicBlue font-semibold text-[15px] flex items-center space-x-1 transition-colors py-2">
+                            <span>대학소개</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-hover:rotate-180 duration-300"></i>
+                        </button>
+                        <div class="absolute top-[80px] left-1/2 -translate-x-1/2 w-48 bg-white border border-slate-100 shadow-xl rounded-b-xl py-3 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                            <a href="#" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">CU12 소개</a>
+                            <a href="#" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">핵심역량 및 비전</a>
+                            <a href="#" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">발전전략</a>
+                            <a href="#" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">조직 및 참여대학</a>
+                            <a href="#" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">학사 학칙 규정</a>
+                        </div>
+                    </div>
+
+                    <!-- Menu 2: 정규교과 -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-700 hover:text-catholicBlue font-semibold text-[15px] flex items-center space-x-1 transition-colors py-2">
+                            <span>정규교과</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-hover:rotate-180 duration-300"></i>
+                        </button>
+                        <div class="absolute top-[80px] left-1/2 -translate-x-1/2 w-48 bg-white border border-slate-100 shadow-xl rounded-b-xl py-3 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                            <a href="#regular-courses" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">수강신청 안내</a>
+                            <a href="#regular-courses" onclick="filterRegular('catholic')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">가톨릭이념</a>
+                            <a href="#regular-courses" onclick="filterRegular('humanities')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">인문학</a>
+                            <a href="#regular-courses" onclick="filterRegular('social')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">사회과학</a>
+                            <a href="#regular-courses" onclick="filterRegular('science')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">자연과학</a>
+                            <a href="#regular-courses" onclick="filterRegular('engineering')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">공학</a>
+                            <a href="#regular-courses" onclick="filterRegular('art')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">문화/예술</a>
+                        </div>
+                    </div>
+
+                    <!-- Menu 3: 비교과 -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-700 hover:text-catholicBlue font-semibold text-[15px] flex items-center space-x-1 transition-colors py-2">
+                            <span>비교과과정</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-hover:rotate-180 duration-300"></i>
+                        </button>
+                        <div class="absolute top-[80px] left-1/2 -translate-x-1/2 w-48 bg-white border border-slate-100 shadow-xl rounded-b-xl py-3 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                            <a href="#extracurricular-courses" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">비교과 소개</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('tech')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">IT 및 미래기술</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('lang')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">어학 및 역량강화</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('job')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">취업/창업 가이드</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('volunteer')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">인성 및 사회봉사</a>
+                        </div>
+                    </div>
+
+                    <!-- Menu 4: 알림마당 -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-700 hover:text-catholicBlue font-semibold text-[15px] flex items-center space-x-1 transition-colors py-2">
+                            <span>알림 및 학사정보</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-hover:rotate-180 duration-300"></i>
+                        </button>
+                        <div class="absolute top-[80px] left-1/2 -translate-x-1/2 w-48 bg-white border border-slate-100 shadow-xl rounded-b-xl py-3 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                            <a href="#notice-section" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">공지사항</a>
+                            <a href="#academic-guide" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">출결 및 조기취업</a>
+                            <a href="#academic-guide" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">성적 이의 및 이수</a>
+                            <a href="#" onclick="showToast('1:1 문의센터가 준비 중입니다.')" class="block px-6 py-2.5 text-sm text-slate-600 hover:text-catholicBlue hover:bg-slate-50 font-medium">1:1 문의사항</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Search and Quick Action Buttons -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <!-- Search Box -->
+                    <div class="relative">
+                        <input type="text" placeholder="강좌명, 교수명 검색..." class="w-64 bg-slate-100 border border-transparent rounded-full pl-4 pr-10 py-2 text-sm focus:outline-none focus:bg-white focus:border-slate-300 transition-all duration-300">
+                        <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-catholicBlue">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <!-- Quick Portal Button -->
+                    <button onclick="openLoginModal()" class="bg-gradient-to-r from-catholicBlue to-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-lg shadow-blue-700/10 hover:shadow-blue-700/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-right-to-bracket text-xs"></i>
+                        <span>스마트 LMS</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex lg:hidden items-center space-x-3">
+                    <button onclick="openLoginModal()" class="text-catholicBlue p-2 hover:bg-slate-100 rounded-full transition-all duration-300">
+                        <i class="fa-solid fa-user text-xl"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-slate-800 p-2 hover:bg-slate-100 rounded-full transition-all duration-300">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Slide-out Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white shadow-inner max-h-[80vh] overflow-y-auto">
+            <div class="px-4 pt-4 pb-6 space-y-4">
+                <!-- Search bar in Mobile -->
+                <div class="relative">
+                    <input type="text" placeholder="강좌명, 교수명 검색..." class="w-full bg-slate-100 border border-slate-200 rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none">
+                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+                <!-- Accordions for Mobile Links -->
+                <div class="space-y-2">
+                    <div class="border-b border-slate-100 pb-2">
+                        <span class="block text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">CU12 공유대학</span>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <a href="#" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">대학소개</a>
+                            <a href="#" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">비전 및 역량</a>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-2">
+                        <span class="block text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">정규교과 교육과정</span>
+                        <div class="grid grid-cols-3 gap-1.5 text-xs">
+                            <a href="#regular-courses" onclick="filterRegular('all'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">전체</a>
+                            <a href="#regular-courses" onclick="filterRegular('catholic'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">가톨릭이념</a>
+                            <a href="#regular-courses" onclick="filterRegular('humanities'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">인문학</a>
+                            <a href="#regular-courses" onclick="filterRegular('social'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">사회과학</a>
+                            <a href="#regular-courses" onclick="filterRegular('science'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">자연과학</a>
+                            <a href="#regular-courses" onclick="filterRegular('engineering'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">공학</a>
+                            <a href="#regular-courses" onclick="filterRegular('art'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 text-center font-medium">문화예술</a>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-2">
+                        <span class="block text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">비교과과정</span>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <a href="#extracurricular-courses" onclick="filterExtra('all'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">비교과 전체</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('tech'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">IT/미래기술</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('lang'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">어학/역량강화</a>
+                            <a href="#extracurricular-courses" onclick="filterExtra('job'); toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">취업 및 창업</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="block text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">알림 및 고객지원</span>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <a href="#notice-section" onclick="toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">공지사항</a>
+                            <a href="#academic-guide" onclick="toggleMobileMenu()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded text-slate-700 font-medium">학사 수강지침</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex flex-col space-y-2">
+                    <button onclick="openLoginModal()" class="w-full bg-catholicBlue text-white font-semibold py-3 rounded-xl shadow-md text-center text-sm">
+                        <i class="fa-solid fa-lock mr-2"></i>로그인 / 스마트 LMS 입장
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         HERO BANNER CAROUSEL
+         ========================================== -->
+    <section class="relative bg-slate-900 overflow-hidden h-[420px] sm:h-[460px] md:h-[500px] lg:h-[460px]">
+        <!-- Carousel Slides -->
+        <div id="carousel-container" class="relative w-full h-full">
+            
+            <!-- Slide 1 -->
+            <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out z-10">
+                <div class="absolute inset-0 bg-gradient-to-r from-catholicNavy via-slate-900/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/0A2540/ffffff?text=CU12+CATHOLIC+METAVERSITY');"></div>
+                <div class="absolute inset-x-0 bottom-0 top-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center z-20 text-white">
+                    <span class="bg-catholicGold/20 text-catholicGold border border-catholicGold/30 text-xs font-bold tracking-widest px-3 py-1 rounded-full w-max mb-3 uppercase">Semester Guide</span>
+                    <h2 class="text-2xl md:text-5xl font-black tracking-tight mb-2 md:mb-4 leading-tight">
+                        2026학년도 1학기 개강<br class="hidden md:inline"> 및 실시간 Zoom ID 연동 안내
+                    </h2>
+                    <p class="text-sm md:text-lg text-slate-300 max-w-xl mb-4 md:mb-6 leading-relaxed font-light">
+                        가톨릭공유대학 교과목은 스마트 화상 강의 플랫폼을 통해 통합 운영됩니다. 동시적 강의 수강을 위해 본인의 올바른 줌 계정을 확인하세요.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#academic-guide" class="bg-catholicGold hover:bg-yellow-600 text-slate-950 font-bold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-yellow-600/25 transition-all text-sm flex items-center space-x-2">
+                            <span>출결 및 줌 매뉴얼</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#regular-courses" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white border border-white/20 font-semibold px-6 py-2.5 rounded-lg transition-all text-sm">
+                            개설 강좌 리스트
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out z-0">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-950 via-slate-950/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/004B87/ffffff?text=Summer+Semester+Registration');"></div>
+                <div class="absolute inset-x-0 bottom-0 top-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center z-20 text-white">
+                    <span class="bg-blue-400/20 text-blue-300 border border-blue-400/30 text-xs font-bold tracking-widest px-3 py-1 rounded-full w-max mb-3 uppercase">Academic Registration</span>
+                    <h2 class="text-2xl md:text-5xl font-black tracking-tight mb-2 md:mb-4 leading-tight">
+                        2026학년도 하계 계절학기<br class="hidden md:inline"> 공유대학 연동 수강신청 오픈
+                    </h2>
+                    <p class="text-sm md:text-lg text-slate-300 max-w-xl mb-4 md:mb-6 leading-relaxed font-light">
+                        전국 가톨릭 12개 대학의 최고 석학 강의를 계절학기를 통해 수강하세요. 수강 학점 및 기간 일정을 반드시 확인하시기 바랍니다.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#regular-courses" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-blue-600/25 transition-all text-sm flex items-center space-x-2">
+                            <span>개설교과 전체보기</span>
+                            <i class="fa-solid fa-calendar-days text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out z-0">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-950 via-slate-950/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/4c1d95/ffffff?text=Social+Platform+Events');"></div>
+                <div class="absolute inset-x-0 bottom-0 top-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center z-20 text-white">
+                    <span class="bg-purple-400/20 text-purple-300 border border-purple-400/30 text-xs font-bold tracking-widest px-3 py-1 rounded-full w-max mb-3 uppercase">Campus Life & Event</span>
+                    <h2 class="text-2xl md:text-5xl font-black tracking-tight mb-2 md:mb-4 leading-tight">
+                        공유대학 공식 인스타그램<br class="hidden md:inline"> 리뉴얼 오픈 이벤트 진행중
+                    </h2>
+                    <p class="text-sm md:text-lg text-slate-300 max-w-xl mb-4 md:mb-6 leading-relaxed font-light">
+                        새로워진 가톨릭공유대학 SNS를 팔로우하고 후기 및 응원 댓글을 달아주세요. 추첨을 통해 공식 디자인 기프트 패키지를 드립니다.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="https://instagram.com" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-pink-600/25 transition-all text-sm flex items-center space-x-2">
+                            <span>인스타그램 참여</span>
+                            <i class="fa-brands fa-instagram text-base"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 (Integration of Platform statistics, optimized for mobile non-cutoff) -->
+            <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out z-0 bg-gradient-to-br from-catholicNavy via-slate-950 to-catholicBlue">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent)] pointer-events-none"></div>
+                <div class="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row justify-center lg:justify-between items-center z-20 text-white py-4 sm:py-6 lg:py-0 gap-4 lg:gap-8 h-full">
+                    <!-- Left Intro -->
+                    <div class="flex flex-col justify-center max-w-md text-center lg:text-left shrink-0">
+                        <span class="bg-catholicGold/20 text-catholicGold border border-catholicGold/30 text-[10px] sm:text-xs font-bold tracking-widest px-2.5 py-1 rounded-full w-max mb-1.5 sm:mb-3 mx-auto lg:mx-0 uppercase">CU12 Platform Statistics</span>
+                        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black tracking-tight mb-1 sm:mb-2 leading-tight">
+                            숫자로 증명하는<br class="hidden lg:inline"> 연합 지성의 메타버시티
+                        </h2>
+                        <p class="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-light hidden sm:block max-w-sm">
+                            국내 최정상 가톨릭 대학 협동체가 혁신적인 온라인 인프라와 양질의 학사 설계 시너지 효과를 만들어 냅니다.
+                        </p>
+                    </div>
+
+                    <!-- Right Statistics Grid (Extremely compact on mobile to prevent cut-off) -->
+                    <div class="grid grid-cols-2 gap-2.5 sm:gap-4 w-full max-w-md sm:max-w-lg lg:max-w-xl">
+                        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl flex flex-col justify-center">
+                            <span class="text-[10px] sm:text-xs text-slate-300 font-semibold uppercase">Open Courses</span>
+                            <div class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight mt-0.5 text-white">
+                                <span class="counter" data-target="418">0</span><span class="text-catholicGold text-sm sm:text-base ml-0.5">+</span>
+                            </div>
+                            <span class="text-[9px] sm:text-xs text-slate-400 mt-0.5">누적 개설 교과목 수</span>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl flex flex-col justify-center">
+                            <span class="text-[10px] sm:text-xs text-slate-300 font-semibold uppercase">Students Enrolled</span>
+                            <div class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight mt-0.5 text-white">
+                                <span class="counter" data-target="51506">0</span><span class="text-catholicGold text-sm sm:text-base ml-0.5">+</span>
+                            </div>
+                            <span class="text-[9px] sm:text-xs text-slate-400 mt-0.5">누적 이용 수강 인원</span>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl flex flex-col justify-center">
+                            <span class="text-[10px] sm:text-xs text-slate-300 font-semibold uppercase">Active Universities</span>
+                            <div class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight mt-0.5 text-white">
+                                <span>12</span><span class="text-catholicGold text-sm sm:text-base ml-0.5">개교</span>
+                            </div>
+                            <span class="text-[9px] sm:text-xs text-slate-400 mt-0.5">가톨릭계 연합 대학교 수</span>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl flex flex-col justify-center">
+                            <span class="text-[10px] sm:text-xs text-slate-300 font-semibold uppercase">Current Term Students</span>
+                            <div class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight mt-0.5 text-white">
+                                <span class="counter" data-target="12750">0</span><span class="text-catholicGold text-sm sm:text-base ml-0.5">명</span>
+                            </div>
+                            <span class="text-[9px] sm:text-xs text-slate-400 mt-0.5">2026학년도 수강생</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 backdrop-blur-sm text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 z-30">
+            <i class="fa-solid fa-chevron-left text-lg md:text-xl"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 backdrop-blur-sm text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 z-30">
+            <i class="fa-solid fa-chevron-right text-lg md:text-xl"></i>
+        </button>
+
+        <!-- Carousel Indicators & Play/Pause -->
+        <div class="absolute bottom-6 inset-x-0 flex justify-center items-center space-x-3 z-30">
+            <div class="flex space-x-2 bg-slate-900/60 backdrop-blur-md px-3 py-1.5 rounded-full">
+                <button onclick="setSlide(0)" class="carousel-dot w-2 h-2 rounded-full bg-white transition-all duration-300"></button>
+                <button onclick="setSlide(1)" class="carousel-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></button>
+                <button onclick="setSlide(2)" class="carousel-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></button>
+                <button onclick="setSlide(3)" class="carousel-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></button>
+            </div>
+            <button onclick="toggleCarouselPlay()" class="bg-slate-900/60 backdrop-blur-md w-6 h-6 rounded-full text-white text-[10px] flex items-center justify-center hover:bg-slate-800 transition-colors">
+                <i id="carousel-play-icon" class="fa-solid fa-pause"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         REGULAR COURSES (정규 교과목)
+         ========================================== -->
+    <section id="regular-courses" class="py-16 bg-slateBG">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <span class="text-catholicBlue font-bold text-sm tracking-wider uppercase"><i class="fa-solid fa-graduation-cap mr-1"></i> Core Curriculum</span>
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">2026학년도 정규 교과목 개설 현황</h3>
+                    <p class="text-sm text-slate-500 mt-1">국내 최고 가톨릭 명문 12개 대학의 고품격 연합 강의를 수강 신청하세요.</p>
+                </div>
+                <button onclick="showToast('교강요람 PDF 다운로드를 시작합니다.')" class="mt-4 md:mt-0 text-xs md:text-sm text-catholicBlue border border-catholicBlue hover:bg-catholicBlue hover:text-white font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-1.5 self-start md:self-auto bg-white">
+                    <i class="fa-regular fa-file-pdf"></i>
+                    <span>강의 요람 다운로드</span>
+                </button>
+            </div>
+
+            <!-- Categories Filter Tabs -->
+            <div class="flex overflow-x-auto space-x-2 pb-4 custom-scrollbar mb-8">
+                <button onclick="filterRegular('all')" id="btn-reg-all" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-catholicBlue text-white shadow-md shadow-blue-900/10">
+                    전체 보기
+                </button>
+                <button onclick="filterRegular('catholic')" id="btn-reg-catholic" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    가톨릭이념
+                </button>
+                <button onclick="filterRegular('humanities')" id="btn-reg-humanities" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    인문학
+                </button>
+                <button onclick="filterRegular('social')" id="btn-reg-social" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    사회과학
+                </button>
+                <button onclick="filterRegular('science')" id="btn-reg-science" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    자연과학
+                </button>
+                <button onclick="filterRegular('engineering')" id="btn-reg-engineering" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    공학
+                </button>
+                <button onclick="filterRegular('art')" id="btn-reg-art" class="reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    문화/예술
+                </button>
+            </div>
+
+            <!-- Course Card Grid -->
+            <div id="regular-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will dynamically inject cards here. -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         EXTRACURRICULAR COURSES (비정규/비교과과정)
+         ========================================== -->
+    <section id="extracurricular-courses" class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <span class="text-purple-600 font-bold text-sm tracking-wider uppercase"><i class="fa-solid fa-award mr-1"></i> Extracurricular program</span>
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">비교과 및 역량 개발 과정</h3>
+                    <p class="text-sm text-slate-500 mt-1">LMS 마일리지를 적립하고 직무 역량부터 자기 계발까지 성장을 이뤄보세요.</p>
+                </div>
+            </div>
+
+            <!-- Extracurricular Categories -->
+            <div class="flex overflow-x-auto space-x-2 pb-4 custom-scrollbar mb-8">
+                <button onclick="filterExtra('all')" id="btn-ext-all" class="ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-purple-600 text-white shadow-md shadow-purple-900/10">
+                    전체 프로그램
+                </button>
+                <button onclick="filterExtra('tech')" id="btn-ext-tech" class="ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-slate-50 text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    IT 및 미래기술
+                </button>
+                <button onclick="filterExtra('lang')" id="btn-ext-lang" class="ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-slate-50 text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    어학 및 글로벌역량
+                </button>
+                <button onclick="filterExtra('job')" id="btn-ext-job" class="ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-slate-50 text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    취업/창업 실무
+                </button>
+                <button onclick="filterExtra('volunteer')" id="btn-ext-volunteer" class="ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-slate-50 text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+                    인성 및 사회공동체
+                </button>
+            </div>
+
+            <!-- Extra Courses Grid -->
+            <div id="extracurricular-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Javascript will inject here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ACADEMIC INFO QUICK GUIDE (아코디언 형태의 깔끔한 가이드 - 와이드 레이아웃으로 변경)
+         ========================================== -->
+    <section id="academic-guide" class="py-16 bg-slateBG">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <span class="text-catholicBlue font-bold text-sm tracking-wider uppercase"><i class="fa-solid fa-circle-question mr-1"></i> Support & Guidelines</span>
+                <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">가톨릭공유대학 학사 수강 가이드</h3>
+                <p class="text-xs md:text-sm text-slate-500 mt-2">출결, 공결 승인 및 연합 성적 연동 절차에 대한 학칙 표준 지침입니다.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Accordion Item 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button onclick="toggleAccordion('acc1')" class="w-full px-6 py-4 flex justify-between items-center bg-white text-left font-bold text-slate-900 hover:bg-slate-50 transition-colors">
+                        <span class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-lg bg-blue-100 text-catholicBlue flex items-center justify-center text-sm"><i class="fa-solid fa-user-check"></i></span>
+                            <span>[출결] 비동시적(동영상) 및 동시적(Zoom) 출석 기준 안내</span>
+                        </span>
+                        <i id="acc1-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="acc1-content" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+                        <div class="p-6 border-t border-slate-100 text-sm text-slate-600 leading-relaxed space-y-2">
+                            <p class="font-semibold text-slate-800">1. 동시적 강의 [Zoom실시간 화상 수업]:</p>
+                            <p class="pl-4">• 강의실에 사전 등록된 Zoom ID로 접속하여야 하며, 미등록 ID 사용 시 결석 처리됩니다.</p>
+                            <p class="pl-4">• 애플 모바일 기기 사용자 중 임시 ID 생성 시 자동 출석 집계가 어려우니 수강 전 개인 ID 설정을 재차 확인해주시기 바랍니다.</p>
+                            <p class="font-semibold text-slate-800 mt-4">2. 비동시적 강의 [VOD 녹화 동영상 수업]:</p>
+                            <p class="pl-4">• 주차별 개설일 기준 일정 기간(통상 1주일) 내에 학습 진도율 100% 충족 시 출석으로 자동 연동 인정됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button onclick="toggleAccordion('acc2')" class="w-full px-6 py-4 flex justify-between items-center bg-white text-left font-bold text-slate-900 hover:bg-slate-50 transition-colors">
+                        <span class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-signature"></i></span>
+                            <span>[공결] 조기취업 및 공식 공결서류 신청 지침</span>
+                        </span>
+                        <i id="acc2-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="acc2-content" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+                        <div class="p-6 border-t border-slate-100 text-sm text-slate-600 leading-relaxed space-y-2">
+                            <p>총 수업시수의 1/4 이상을 결석하거나, 공결을 포함하여 총 결석 시수가 1/3을 초과하는 경우 학칙 및 연합 규정에 의거하여 출석 미달 <strong class="text-red-500">F등급</strong> 처리됩니다.</p>
+                            <p class="font-semibold text-slate-800 mt-3">■ 조기취업 및 공식 유권 서류 인정 방법:</p>
+                            <p class="pl-4">• 재직증명서 및 4대보험 가입확인서(취업자만 적용)를 구비하여 LMS 상단의 [공결 신청] 메뉴에서 제출해야 함.</p>
+                            <p class="pl-4">• 공식 질병 등 사유 공결 시 진단서 또는 의사 처방전 서류가 즉시 구비 완료되어야 정상 반영됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button onclick="toggleAccordion('acc3')" class="w-full px-6 py-4 flex justify-between items-center bg-white text-left font-bold text-slate-900 hover:bg-slate-50 transition-colors">
+                        <span class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-lg bg-green-100 text-green-600 flex items-center justify-center text-sm"><i class="fa-solid fa-receipt"></i></span>
+                            <span>[성적] 연합 교과목 학점 이수구분 및 본교 학사 이전 과정</span>
+                        </span>
+                        <i id="acc3-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="acc3-content" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+                        <div class="p-6 border-t border-slate-100 text-sm text-slate-600 leading-relaxed space-y-2">
+                            <p>• 공유대학에서 이수한 성적은 본교 대학의 규정에 따른 교양 선택, 일반 교양 등의 <strong class="text-catholicBlue">이수 구분</strong>으로 정규 학사 데이터에 자동 전송 및 등록처리됩니다.</p>
+                            <p>• 공유대학 학장단의 심의 하에 평정된 원성적은 정규 기간 마감 후 각 제휴 참여대학 종합 정보 시스템에 연동되어 최종 반영됩니다.</p>
+                            <p>• 졸업학기(4학년 2학기 또는 8차 학기 재학생) 수강 시에는 타 대학 성적 처리 일정 미세 지연 등으로 인해 본교 졸업 사정에 예외가 발생할 수 있으니 학부대학실에 사전 확인하시기 바랍니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         NOTICE BOARD (와이드 레이아웃으로 최적화)
+         ========================================== -->
+    <section id="notice-section" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl text-catholicBlue"><i class="fa-regular fa-clipboard"></i></span>
+                        <h3 class="text-2xl font-extrabold text-slate-900">CU12 포털 공지사항</h3>
+                    </div>
+                    <a href="#" onclick="showToast('공지사항 전체목록 페이지를 준비중입니다.')" class="text-sm font-semibold text-catholicBlue hover:underline flex items-center space-x-1">
+                        <span>전체 공지 보기</span>
+                        <i class="fa-solid fa-angles-right text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="divide-y divide-slate-100">
+                    <!-- Notice Item 1 -->
+                    <div onclick="showToast('[공동공지] 2026학년도 하계 수강안내가 업데이트 되었습니다.')" class="py-4 hover:bg-slate-50 px-4 rounded-xl transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1.5">
+                                <span class="bg-blue-100 text-catholicBlue text-[10px] font-bold px-2 py-0.5 rounded">공통안내</span>
+                                <span class="bg-orange-100 text-orange-600 text-[10px] font-bold px-2 py-0.5 rounded">중요</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base hover:text-catholicBlue transition-colors">
+                                [Common] 2026학년도 하계 계절학기 개설교과목 및 온라인 수강 가이드라인 안내
+                            </h4>
+                        </div>
+                        <span class="text-sm text-slate-400 font-medium whitespace-nowrap">2026.05.12</span>
+                    </div>
+
+                    <!-- Notice Item 2 -->
+                    <div onclick="showToast('[공동공지] 하계학기 타임라인 가이드 안내.')" class="py-4 hover:bg-slate-50 px-4 rounded-xl transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1.5">
+                                <span class="bg-blue-100 text-catholicBlue text-[10px] font-bold px-2 py-0.5 rounded">공통안내</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base hover:text-catholicBlue transition-colors">
+                                [Common] 2026학년도 하계 계절학기 연동 학사 일정 전체 타임라인 공지
+                            </h4>
+                        </div>
+                        <span class="text-sm text-slate-400 font-medium whitespace-nowrap">2026.05.12</span>
+                    </div>
+
+                    <!-- Notice Item 3 -->
+                    <div onclick="showToast('[이벤트공지] 신규 메타버스 플랫폼 오픈 안내.')" class="py-4 hover:bg-slate-50 px-4 rounded-xl transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1.5">
+                                <span class="bg-purple-100 text-purple-600 text-[10px] font-bold px-2 py-0.5 rounded">이벤트</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base hover:text-catholicBlue transition-colors">
+                                [EVENT] 가톨릭공유대학 공식 메타버스 통합 플랫폼 론칭 기념 공유 이벤트 안내
+                            </h4>
+                        </div>
+                        <span class="text-sm text-slate-400 font-medium whitespace-nowrap">2026.05.11</span>
+                    </div>
+
+                    <!-- Notice Item 4 -->
+                    <div onclick="showToast('[기능안내] 통합 이수증 셀프 출력안내.')" class="py-4 hover:bg-slate-50 px-4 rounded-xl transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1.5">
+                                <span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded">학사연동</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base hover:text-catholicBlue transition-colors">
+                                공유대학 통합 이수증 발급 관리자/학생 셀프 간편 발급 기능 추가 개발 건 안내
+                            </h4>
+                        </div>
+                        <span class="text-sm text-slate-400 font-medium whitespace-nowrap">2026.02.23</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PARTICIPATING UNIVERSITIES FOOTER
+         ========================================== -->
+    <footer class="bg-slate-900 text-slate-400 mt-auto border-t border-slate-800">
+        <!-- 12 Universities Grid Logo Area -->
+        <div class="border-b border-slate-800/80 py-10 bg-slate-950/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-xs font-bold uppercase tracking-widest text-slate-500 mb-6">가톨릭공유대학(CU12) 12개 연합 참여대학 협동체</p>
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4 items-center justify-items-center">
+                    <!-- Univ 1 -->
+                    <div onclick="showToast('서강대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">서강</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">서강대</span>
+                    </div>
+                    <!-- Univ 2 -->
+                    <div onclick="showToast('가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">가톨릭</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">가톨릭대</span>
+                    </div>
+                    <!-- Univ 3 -->
+                    <div onclick="showToast('대구가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">대가</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">대구가톨릭대</span>
+                    </div>
+                    <!-- Univ 4 -->
+                    <div onclick="showToast('가톨릭관동대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">관동</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">가톨릭관동대</span>
+                    </div>
+                    <!-- Univ 5 -->
+                    <div onclick="showToast('인천가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">인천</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">인천가톨릭대</span>
+                    </div>
+                    <!-- Univ 6 -->
+                    <div onclick="showToast('부산가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">부산</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">부산가톨릭대</span>
+                    </div>
+                    <!-- Univ 7 -->
+                    <div onclick="showToast('광주가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">광주</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">광주가톨릭대</span>
+                    </div>
+                    <!-- Univ 8 -->
+                    <div onclick="showToast('목포가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">목포</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">목포가톨릭대</span>
+                    </div>
+                    <!-- Univ 9 -->
+                    <div onclick="showToast('대전가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">대전</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">대전가톨릭대</span>
+                    </div>
+                    <!-- Univ 10 -->
+                    <div onclick="showToast('수원가톨릭대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">수원</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">수원가톨릭대</span>
+                    </div>
+                    <!-- Univ 11 -->
+                    <div onclick="showToast('가톨릭꽃동네대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">꽃동네</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">꽃동네대</span>
+                    </div>
+                    <!-- Univ 12 -->
+                    <div onclick="showToast('가톨릭상지대학교 홈페이지로 이동합니다.')" class="flex flex-col items-center group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 font-extrabold text-xs group-hover:bg-catholicBlue group-hover:text-white transition-all shadow-md">상지</div>
+                        <span class="text-[9px] mt-1.5 font-semibold text-slate-500 group-hover:text-slate-300">가톨릭상지대</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Address and Copyright Area -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-8">
+                <div class="max-w-xl">
+                    <div class="flex items-center space-x-2 text-white mb-4">
+                        <div class="w-7 h-7 rounded bg-catholicBlue flex items-center justify-center text-xs font-bold text-white">C12</div>
+                        <span class="font-extrabold text-sm tracking-wide">한국 가톨릭교양공유대학 운영사무국</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                        대표 위탁운영: 가톨릭대학교 학부대학 학무지원팀 | 주소: (14662) 경기도 부천시 원미구 지봉로 43<br>
+                        시스템 지원 연락처: 02-2164-4983 (평일 09시 ~ 17시, 점심시간 제외)<br>
+                        시스템 인프라 파트너: IMAXSOFT Athena LMS 엔진 연동 OpenAPI v4
+                    </p>
+                    <p class="text-[10px] text-slate-500 leading-relaxed">
+                        본 가톨릭공유대학 통합 LMS 서비스는 12개 가톨릭 협력 대학교간 학사 관리 목적 외에 불법 무단 복제 및 사용을 금합니다.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-4 text-xs">
+                    <a href="#" onclick="showToast('개인정보처리방침 안내 레이어 준비 중입니다.')" class="hover:text-white text-slate-300 font-bold">개인정보처리방침</a>
+                    <span class="text-slate-700">|</span>
+                    <a href="#" onclick="showToast('이용약관 안내 준비 중입니다.')" class="hover:text-white">이용약관</a>
+                    <span class="text-slate-700">|</span>
+                    <a href="#" onclick="showToast('이메일 무단 수집 거부 규정.')" class="hover:text-white">이메일무단수집거부</a>
+                    <span class="text-slate-700">|</span>
+                    <a href="#" onclick="showToast('학사운영 규정 다운로드.')" class="hover:text-white">운영 규정</a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800/60 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                <span>Copyright © 2026 Catholic Shared University Portal (CU12). All Rights Reserved.</span>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         MODALS (UNIFIED INTERACTIVE LOGIN MODAL)
+         ========================================== -->
+    <div id="login-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden transform scale-95 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-catholicNavy to-catholicBlue px-6 py-6 text-white relative">
+                <button onclick="closeLoginModal()" class="absolute right-4 top-4 text-white/70 hover:text-white text-lg transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center text-white font-bold text-sm">CU</div>
+                    <div>
+                        <h4 class="font-extrabold text-lg">가톨릭공유대학 스마트 LMS 로그인</h4>
+                        <span class="text-xs text-slate-300">Catholic Shared University Integrated Login</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Content Tabs -->
+            <div class="p-6">
+                <!-- User Type Selector Tabs -->
+                <div class="grid grid-cols-2 bg-slate-100 p-1 rounded-xl mb-6">
+                    <button id="tab-univ" onclick="switchLoginTab('univ')" class="py-2.5 font-bold text-sm rounded-lg transition-all bg-white text-slate-900 shadow-sm">
+                        가톨릭 12개 대학 학부생/교직원
+                    </button>
+                    <button id="tab-general" onclick="switchLoginTab('general')" class="py-2.5 font-bold text-sm rounded-lg transition-all text-slate-500 hover:text-slate-800">
+                        일반 회원 사용자
+                    </button>
+                </div>
+
+                <!-- Tab 1 Form: University Users -->
+                <form id="form-univ" onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-1">소속 제휴 대학교 선택 *</label>
+                        <div class="relative">
+                            <select id="login-univ-select" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-catholicBlue focus:bg-white transition-colors appearance-none cursor-pointer">
+                                <option value="" disabled selected>소속 대학을 선택해주세요</option>
+                                <option value="sogang">서강대학교 (Sogang University)</option>
+                                <option value="cuk">가톨릭대학교 (Catholic Univ of Korea)</option>
+                                <option value="cu">대구가톨릭대학교 (Catholic Univ of Daegu)</option>
+                                <option value="cku">가톨릭관동대학교 (Catholic Kwandong Univ)</option>
+                                <option value="iccu">인천가톨릭대학교 (Incheon Catholic Univ)</option>
+                                <option value="cup">부산가톨릭대학교 (Catholic Univ of Pusan)</option>
+                                <option value="gcu">광주가톨릭대학교 (Gwangju Catholic Univ)</option>
+                                <option value="mcu">목포가톨릭대학교 (Mokpo Catholic Univ)</option>
+                                <option value="dcu">대전가톨릭대학교 (Daejeon Catholic Univ)</option>
+                                <option value="suwon">수원가톨릭대학교 (Suwon Catholic Univ)</option>
+                                <option value="kkot">가톨릭꽃동네대학교 (Kkotdongnae Univ)</option>
+                                <option value="sangji">가톨릭상지대학교 (Catholic Sangji College)</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-1">본교 학번 / 아이디 (Trinity ID) *</label>
+                        <input type="text" placeholder="본교 종합정보시스템 ID를 입력하세요" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-catholicBlue focus:bg-white transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-1">비밀번호 *</label>
+                        <input type="password" placeholder="비밀번호를 입력하세요" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-catholicBlue focus:bg-white transition-colors">
+                        <span class="block text-[10px] text-slate-400 mt-1.5"><i class="fa-solid fa-circle-info mr-1"></i> 대학 최초 로그인 비밀번호는 본교 초기 설정 규칙(예: 주민번호 뒤 7자리 등)을 적용합니다.</span>
+                    </div>
+
+                    <div class="flex items-center justify-between py-2">
+                        <label class="flex items-center space-x-2 text-xs text-slate-500 cursor-pointer">
+                            <input type="checkbox" class="rounded text-catholicBlue focus:ring-catholicBlue">
+                            <span>로그인 상태 유지</span>
+                        </label>
+                        <a href="#" onclick="showToast('해당 대학 학사팀으로 비밀번호 찾기 절차를 위임 요청합니다.')" class="text-xs text-catholicBlue font-bold hover:underline">비밀번호 초기화 / 안내</a>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-catholicNavy to-catholicBlue text-white font-extrabold py-3.5 rounded-xl shadow-lg hover:shadow-blue-900/10 hover:scale-[1.01] active:scale-[0.99] transition-all text-sm">
+                        통합 계정 로그인
+                    </button>
+                </form>
+
+                <!-- Tab 2 Form: General Users (Hidden default) -->
+                <form id="form-general" onsubmit="handleLogin(event)" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-1">아이디 (ID) *</label>
+                        <input type="text" placeholder="가입된 일반회원 아이디를 입력하세요" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-catholicBlue focus:bg-white transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-1">비밀번호 *</label>
+                        <input type="password" placeholder="비밀번호를 입력하세요" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-catholicBlue focus:bg-white transition-colors">
+                    </div>
+
+                    <div class="flex items-center justify-between py-2">
+                        <label class="flex items-center space-x-2 text-xs text-slate-500 cursor-pointer">
+                            <input type="checkbox" class="rounded text-catholicBlue focus:ring-catholicBlue">
+                            <span>로그인 상태 유지</span>
+                        </label>
+                        <div class="flex space-x-3 text-xs text-slate-500">
+                            <a href="#" onclick="showToast('아이디 찾기 시스템을 작동합니다.')" class="hover:underline">아이디 찾기</a>
+                            <span>|</span>
+                            <a href="#" onclick="showToast('비밀번호 변경 이메일을 요청합니다.')" class="hover:underline">비밀번호 재설정</a>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-slate-900 text-white font-extrabold py-3.5 rounded-xl shadow-lg hover:shadow-slate-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all text-sm">
+                        일반 회원 로그인
+                    </button>
+                    
+                    <button type="button" onclick="showToast('일반 신규 가입 폼을 오픈합니다.')" class="w-full bg-white text-slate-700 border border-slate-200 font-bold py-3 rounded-xl hover:bg-slate-50 transition-all text-xs text-center block">
+                        신규 일반 회원 등록하기
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL: SMART LMS COURSE DETAIL VIEW (X 아이콘 닫기만 제공)
+         ========================================== -->
+    <div id="course-detail-modal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden transform scale-95 transition-all duration-300 border border-slate-100 flex flex-col max-h-[90vh]">
+            <!-- Virtual Browser / LMS Header -->
+            <div class="bg-gradient-to-r from-catholicNavy via-catholicBlue to-blue-800 px-6 py-5 text-white flex justify-between items-center shrink-0">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                    <span class="text-xs text-white/60 font-mono pl-2">|</span>
+                    <span class="font-extrabold text-sm tracking-wide flex items-center space-x-1.5">
+                        <i class="fa-solid fa-graduation-cap text-catholicGold"></i>
+                        <span>CU12 스마트 LMS - 강의 상세 정보 브라우저</span>
+                    </span>
+                </div>
+                <!-- X Close Button is the SOLE close action as requested -->
+                <button onclick="closeCourseDetailModal()" class="text-white/80 hover:text-white hover:scale-110 transition-all text-xl" title="닫기">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Detail Modal Body (Scrollable) -->
+            <div class="p-8 overflow-y-auto custom-scrollbar space-y-6">
+                <!-- University Badge & Course Title -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span id="detail-school" class="bg-catholicBlue/10 text-catholicBlue text-xs font-black px-3 py-1 rounded-full">가톨릭대학교</span>
+                        <span id="detail-category" class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full">인문학 교양</span>
+                    </div>
+                    <h3 id="detail-title" class="text-2xl md:text-3xl font-black text-slate-900 leading-tight">OTT로 읽는 철학</h3>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div class="text-center md:text-left md:border-r border-slate-200/60 last:border-0 p-2">
+                        <span class="block text-[11px] text-slate-400 font-bold uppercase">담당 교수</span>
+                        <span id="detail-prof" class="text-sm font-extrabold text-slate-800 mt-1 block">김태식 교수</span>
+                    </div>
+                    <div class="text-center md:text-left md:border-r border-slate-200/60 last:border-0 p-2">
+                        <span class="block text-[11px] text-slate-400 font-bold uppercase">수업 이수방법</span>
+                        <span id="detail-method" class="text-sm font-extrabold text-slate-800 mt-1 block">Video(녹화VOD)</span>
+                    </div>
+                    <div class="text-center md:text-left md:border-r border-slate-200/60 last:border-0 p-2">
+                        <span class="block text-[11px] text-slate-400 font-bold uppercase">학점 정보</span>
+                        <span id="detail-credit" class="text-sm font-extrabold class-blue-text text-catholicBlue mt-1 block">3학점 (전공선택)</span>
+                    </div>
+                    <div class="text-center md:text-left last:border-0 p-2">
+                        <span class="block text-[11px] text-slate-400 font-bold uppercase">강의 평점</span>
+                        <span class="text-sm font-extrabold text-amber-500 mt-1 block"><i class="fa-solid fa-star mr-1"></i>4.9 / 5.0</span>
+                    </div>
+                </div>
+
+                <!-- Course Description -->
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-base mb-2 flex items-center space-x-2">
+                        <span class="w-1.5 h-4 bg-catholicBlue rounded"></span>
+                        <span>강좌 개요</span>
+                    </h4>
+                    <p id="detail-desc" class="text-sm text-slate-600 leading-relaxed bg-slate-50/40 p-4 rounded-xl border border-slate-100/80">
+                        현대인들에게 친숙한 OTT 미디어 플랫폼(넷플릭스, 디즈니+ 등) 속 명작 영화 및 드라마 콘텐츠를 철학적 관점에서 흥미롭게 분석하고 성찰하는 융합 교양 강좌입니다.
+                    </p>
+                </div>
+
+                <!-- Syllabus Weekly Schedule -->
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-base mb-2 flex items-center space-x-2">
+                        <span class="w-1.5 h-4 bg-catholicBlue rounded"></span>
+                        <span>대표 강의 계획 (1~4주차 핵심 요약)</span>
+                    </h4>
+                    <div class="border border-slate-100 rounded-2xl overflow-hidden divide-y divide-slate-100 bg-white">
+                        <div class="p-3.5 text-xs flex items-start space-x-4">
+                            <span class="bg-blue-50 text-catholicBlue font-bold px-2 py-0.5 rounded shrink-0">1주차</span>
+                            <span id="syllabus-w1" class="text-slate-600 font-medium">미디어와 대중철학의 만남 - 대중문화를 마주하는 철학의 자세</span>
+                        </div>
+                        <div class="p-3.5 text-xs flex items-start space-x-4">
+                            <span class="bg-blue-50 text-catholicBlue font-bold px-2 py-0.5 rounded shrink-0">2주차</span>
+                            <span id="syllabus-w2" class="text-slate-600 font-medium">OTT 콘텐츠 속 디스토피아와 현대 사회비판 이론 및 실태 성찰</span>
+                        </div>
+                        <div class="p-3.5 text-xs flex items-start space-x-4">
+                            <span class="bg-blue-50 text-catholicBlue font-bold px-2 py-0.5 rounded shrink-0">3주차</span>
+                            <span id="syllabus-w3" class="text-slate-600 font-medium">존재론적 철학 질문 - 영화 속 AI 로봇의 의식과 인간 고유 정체성</span>
+                        </div>
+                        <div class="p-3.5 text-xs flex items-start space-x-4">
+                            <span class="bg-blue-50 text-catholicBlue font-bold px-2 py-0.5 rounded shrink-0">4주차</span>
+                            <span id="syllabus-w4" class="text-slate-600 font-medium">상생과 타자의 철학 - 나와 다른 성향과 공동체 이념을 수용하는 방법론</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Platform Guide -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4 flex items-start space-x-3">
+                    <span class="text-blue-600 text-lg mt-0.5"><i class="fa-solid fa-circle-info"></i></span>
+                    <div class="text-xs text-slate-600 leading-relaxed">
+                        <p class="font-bold text-slate-800 mb-1">스마트 화상수업 및 출석체크 유의사항</p>
+                        본 교과목은 CU12 가톨릭공유대학 공식 연동과정입니다. 모바일 출석 체크를 진행할 시 Zoom 클라이언트 앱에 반드시 본인의 트리니티(Trinity) 대학 계정으로 로그인한 후 입장하셔야 정식 출결 데이터로 승인됩니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Modal Footer (Removed Close button, only LMS entrance action remains) -->
+            <div class="bg-slate-50 border-t border-slate-100 px-6 py-4 flex justify-end shrink-0">
+                <button onclick="handleDetailApply()" class="w-full sm:w-auto bg-catholicBlue hover:bg-blue-800 text-white font-extrabold px-8 py-3 rounded-xl text-sm transition-all shadow-md shadow-blue-900/10 hover:scale-[1.01]">
+                    <i class="fa-solid fa-circle-play mr-1.5"></i> LMS 스마트 교실 입장
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         CUSTOM SLEEK TOAST SYSTEM (Moved to top-center to keep bottom-right clear)
+         ========================================== -->
+    <div id="toast-container" class="fixed top-24 left-1/2 -translate-x-1/2 -translate-y-2 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+
+    <!-- ==========================================
+         JAVASCRIPT LOGIC
+         ========================================== -->
+    <script>
+        // --- 1. MOCK DATASETS ---
+        const regularCourses = [
+            { 
+                id: 5, 
+                title: "OTT로 읽는 철학", 
+                category: "humanities", 
+                prof: "김태식 교수", 
+                school: "가톨릭대학교", 
+                method: "Video(녹화VOD)", 
+                tags: ["중핵교양", "3학점"], 
+                color: "emerald",
+                isExclusive: true,
+                desc: "현대인들에게 아주 친숙한 넷플릭스, 디즈니+ 등 OTT 플랫폼 속 대표적인 명작 드라마와 영화들을 통해 역사적, 비판론적 철학 이론을 쉽고 논리적으로 접근해 보는 과목입니다.",
+                syllabus: [
+                    "미디어 대중철학의 등장 - 대중 매체를 탐구하는 인문학의 시선",
+                    "영상 디스토피아 분석 - 콘텐츠 속 위기와 현대 사회 비판 이론",
+                    "존재론적 철학 문제 - 가상 현실 및 AI 시대에서의 주체성과 자아성",
+                    "상생과 타자 수용 - 문화 콘텐츠를 통과하며 성찰해 보는 공동체 철학"
+                ]
+            },
+            { 
+                id: 6, 
+                title: "우연의 과학 통계학", 
+                category: "science", 
+                prof: "정용진 교수", 
+                school: "가톨릭대학교", 
+                method: "Blended(Zoom/VOD)", 
+                tags: ["선택교양", "3학점"], 
+                color: "cyan",
+                isExclusive: true,
+                desc: "우리 삶의 무작위성(Randomness)과 불확실한 통계 현상들을 수학적 개념과 과학의 눈으로 풀이하고, 현대 빅데이터 환경에서 합리적인 의사결정을 내리기 위한 핵심 기술 기초 이론입니다.",
+                syllabus: [
+                    "데이터 과학의 힘 - 확률과 통계가 세상을 설계하는 알고리즘",
+                    "우연의 규칙화 - 무작위 분포 이론과 실생활 속 복잡한 우연의 분석",
+                    "샘플링과 진실 검정 - 잘못된 통계를 가려내고 팩트를 입증하는 법",
+                    "인공지능과 현대 데이터 예측 - 통계 분석 모형을 이용한 가치 창출"
+                ]
+            },
+            { id: 1, title: "논리와 비판적 사고", category: "humanities", prof: "최진호 교수", school: "서강대학교", method: "Live(Zoom)", tags: ["전선", "3학점"], color: "emerald" },
+            { id: 2, title: "신학적 인간학 및 생명 윤리", category: "catholic", prof: "문희자 교수", school: "서강대학교", method: "Live(Zoom)", tags: ["기필", "2학점"], color: "blue" },
+            { id: 3, title: "스포츠 스토리텔링 및 심리", category: "art", prof: "이승훈 교수", school: "가톨릭관동대학교", method: "Blended(Zoom/VOD)", tags: ["교양선택", "3학점"], color: "purple" },
+            { id: 4, title: "동서양 문명을 만난 일본 역사 이야기", category: "humanities", prof: "장혜진 교수", school: "가톨릭관동대학교", method: "Video(녹화VOD)", tags: ["교양", "2학점"], color: "rose" },
+            { id: 7, title: "휴머노이드 로봇 설계 및 인공지능 기초", category: "engineering", prof: "한동수 교수", school: "인천가톨릭대학교", method: "Live(Zoom)", tags: ["중핵공학", "3학점"], color: "indigo" },
+            { id: 8, title: "영화고전 시네마 외전 분석과 미학", category: "art", prof: "안희원 교수", school: "대구가톨릭대학교", method: "Blended(Zoom/VOD)", tags: ["교선", "3학점"], color: "purple" },
+            { id: 9, title: "사회 혁신 기업가정신과 기술창업", category: "social", prof: "박수정 교수", school: "가톨릭대학교", method: "Blended(Zoom/VOD)", tags: ["중핵교양", "3학점"], color: "amber" }
+        ];
+
+        const extraCourses = [
+            { id: 1, title: "글로벌 팝송으로 익히는 실무 기초 영어표현", category: "lang", prof: "이지영 강사", school: "서강대학교", method: "Blended", tags: ["어학", "마일리지 20xp"] },
+            { id: 2, title: "OPIc 오픽 등급 단기 완성 특강 (기초/심화)", category: "lang", prof: "John Doe 교수", school: "인천가톨릭대학교", method: "Video", tags: ["특강", "마일리지 15xp"] },
+            { id: 3, title: "LLM 초거대 생성형 인공지능 프롬프트 디자인", category: "tech", prof: "AI연구소 소장", school: "가톨릭대학교", method: "Online Live", tags: ["미래기술", "마일리지 50xp"] },
+            { id: 4, title: "스타트업 정부지원 사업계획서 1:1 집중 멘토링", category: "job", prof: "김대표 컨설턴트", school: "서강대학교", method: "1:1 Zoom", tags: ["취창업", "마일리지 30xp"] },
+            { id: 5, title: "스펙업을 위한 SQL / 파이썬 데이터 전처리", category: "tech", prof: "이강수 선임", school: "부산가톨릭대학교", method: "Video", tags: ["직무역량", "마일리지 40xp"] },
+            { id: 6, title: "생명 존중 가치 실천 연합 해외 의료 사회봉사", category: "volunteer", prof: "지도신부", school: "가톨릭연합회", method: "Offline/Hybrid", tags: ["인성봉사", "수수료무료"] }
+        ];
+
+        // --- 2. MOUNT & RENDER FUNCTIONS ---
+        window.onload = function() {
+            renderRegularCourses('all');
+            renderExtraCourses('all');
+            initCarousel();
+            // Start counter animation when the page loads
+            setTimeout(animateCounters, 300);
+        };
+
+        // --- 3. TOAST NOTIFICATION FUNCTION (Alert alternative - Top Center aligned) ---
+        function showToast(message, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            // Styled for top-center slide down presentation
+            toast.className = "bg-slate-900/95 backdrop-blur-md text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 pointer-events-auto transform -translate-y-4 opacity-0 transition-all duration-300 border border-white/10 text-xs sm:text-sm max-w-sm sm:max-w-md";
+            
+            let icon = '<i class="fa-solid fa-circle-info text-blue-400"></i>';
+            if (type === "success") {
+                icon = '<i class="fa-solid fa-circle-check text-green-400"></i>';
+            }
+            
+            toast.innerHTML = `
+                ${icon}
+                <span class="font-medium text-slate-100">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Slide down in top center
+            setTimeout(() => {
+                toast.classList.remove('-translate-y-4', 'opacity-0');
+                toast.classList.add('translate-y-0');
+            }, 50);
+
+            // Fade-out and Remove
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0');
+                toast.classList.add('-translate-y-4', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        function renderRegularCourses(filter = 'all') {
+            const grid = document.getElementById('regular-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? regularCourses : regularCourses.filter(c => c.category === filter);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 bg-white rounded-3xl border border-slate-100">
+                        <i class="fa-regular fa-folder-open text-4xl mb-3 block text-slate-300"></i>
+                        현재 카테고리에 개설된 정규 강좌가 없습니다.
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(course => {
+                const badgeColor = course.color || 'blue';
+                const isExc = course.isExclusive;
+                const buttonText = isExc ? "수강하기" : "수강 신청";
+                const clickHandler = isExc ? `openCourseDetailModal(${course.id})` : `handleApplyCourse('${course.title}')`;
+                const borderHighlight = isExc ? 'border-2 border-catholicBlue/30 shadow-md shadow-blue-950/5' : 'border border-slate-100';
+
+                const card = `
+                    <div class="bg-white rounded-3xl ${borderHighlight} p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1">
+                                    ${isExc ? '<i class="fa-solid fa-bookmark text-catholicGold mr-1 text-[10px]"></i>' : ''}
+                                    <span>${course.school}</span>
+                                </span>
+                                <div class="flex space-x-1.5">
+                                    ${course.tags.map(tag => `<span class="bg-blue-50 text-catholicBlue text-[10px] font-bold px-2 py-0.5 rounded">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-lg leading-snug mb-2 group-hover:text-catholicBlue">
+                                ${course.title}
+                            </h4>
+                            <div class="flex items-center space-x-2 text-sm text-slate-500 mb-6">
+                                <span class="font-semibold text-slate-700">${course.prof}</span>
+                                <span>•</span>
+                                <span class="flex items-center space-x-1"><i class="fa-solid fa-chalkboard-user text-xs"></i> <span>${course.method}</span></span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-slate-50 flex items-center justify-between">
+                            <span class="text-xs text-slate-400 font-medium">강사 피드백 우수</span>
+                            <button onclick="${clickHandler}" class="${isExc ? 'bg-gradient-to-r from-catholicNavy to-catholicBlue text-white shadow-blue-500/10' : 'bg-catholicBlue hover:bg-blue-800 text-white shadow-blue-900/5'} hover:scale-[1.02] hover:opacity-95 font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md">
+                                ${buttonText}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        let selectedCourseTitle = "";
+
+        function openCourseDetailModal(id) {
+            const course = regularCourses.find(c => c.id === id);
+            if (!course) return;
+
+            selectedCourseTitle = course.title;
+
+            // Fill course details
+            document.getElementById('detail-title').innerText = course.title;
+            document.getElementById('detail-school').innerText = course.school;
+            document.getElementById('detail-category').innerText = course.category === "humanities" ? "인문학 학부교양" : "자연과학 학부교양";
+            document.getElementById('detail-prof').innerText = course.prof;
+            document.getElementById('detail-method').innerText = course.method;
+            document.getElementById('detail-credit').innerText = course.tags.join(' / ');
+            document.getElementById('detail-desc').innerText = course.desc;
+
+            // Fill syllabus week plans
+            document.getElementById('syllabus-w1').innerHTML = course.syllabus[0];
+            document.getElementById('syllabus-w2').innerHTML = course.syllabus[1];
+            document.getElementById('syllabus-w3').innerHTML = course.syllabus[2];
+            document.getElementById('syllabus-w4').innerHTML = course.syllabus[3];
+
+            // Open Modal
+            const modal = document.getElementById('course-detail-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.children[0].classList.remove('scale-95');
+            modal.children[0].classList.add('scale-100');
+        }
+
+        function closeCourseDetailModal() {
+            const modal = document.getElementById('course-detail-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.children[0].classList.remove('scale-100');
+            modal.children[0].classList.add('scale-95');
+        }
+
+        function handleDetailApply() {
+            showToast(`'${selectedCourseTitle}' 가상 스마트 강의실로 정상 연동되었습니다.`, 'success');
+            closeCourseDetailModal();
+        }
+
+        function filterRegular(category) {
+            // Update active state of tab buttons
+            document.querySelectorAll('.reg-tab').forEach(btn => {
+                btn.className = "reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900";
+            });
+            const targetBtn = document.getElementById(`btn-reg-${category}`);
+            if (targetBtn) {
+                targetBtn.className = "reg-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-catholicBlue text-white shadow-md shadow-blue-900/10";
+            }
+            renderRegularCourses(category);
+        }
+
+        function renderExtraCourses(filter = 'all') {
+            const grid = document.getElementById('extracurricular-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? extraCourses : extraCourses.filter(c => c.category === filter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 bg-slate-50 rounded-3xl border border-dashed border-slate-200">
+                        <i class="fa-regular fa-folder-open text-4xl mb-3 block text-slate-300"></i>
+                        현재 카테고리에 마련된 비교과 활동이 없습니다.
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(course => {
+                const card = `
+                    <div class="bg-slate-50 hover:bg-white rounded-2xl border border-slate-100 p-5 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full uppercase tracking-wider">${course.category}</span>
+                                <span class="text-[10px] text-slate-400 font-medium">${course.school}</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-sm leading-snug mb-1 hover:text-purple-600 transition-colors">${course.title}</h4>
+                            <p class="text-xs text-slate-400 mb-4">${course.prof}</p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[10px] font-extrabold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded">${course.tags[0]}</span>
+                            <button onclick="handleApplyCourse('[비교과] ${course.title}')" class="text-xs font-bold text-purple-600 hover:text-purple-800 transition-colors">참여신청 <i class="fa-solid fa-angle-right ml-0.5 text-[10px]"></i></button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        function filterExtra(category) {
+            document.querySelectorAll('.ext-tab').forEach(btn => {
+                btn.className = "ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-slate-50 text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900";
+            });
+            const targetBtn = document.getElementById(`btn-ext-${category}`);
+            if (targetBtn) {
+                targetBtn.className = "ext-tab px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 bg-purple-600 text-white shadow-md shadow-purple-900/10";
+            }
+            renderExtraCourses(category);
+        }
+
+        // --- 4. BANNER CAROUSEL LOGIC ---
+        let currentSlideIdx = 0;
+        let carouselInterval;
+        let isCarouselPlaying = true;
+
+        function initCarousel() {
+            startCarouselTimer();
+        }
+
+        function startCarouselTimer() {
+            if (carouselInterval) clearInterval(carouselInterval);
+            carouselInterval = setInterval(() => {
+                nextSlide();
+            }, 6000);
+        }
+
+        function updateCarouselUI() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlideIdx) {
+                    slide.classList.remove('opacity-0', 'z-0');
+                    slide.classList.add('opacity-100', 'z-10');
+                } else {
+                    slide.classList.remove('opacity-100', 'z-10');
+                    slide.classList.add('opacity-0', 'z-0');
+                }
+            });
+
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIdx) {
+                    dot.classList.remove('bg-white/40');
+                    dot.classList.add('bg-white', 'w-4');
+                } else {
+                    dot.classList.remove('bg-white', 'w-4');
+                    dot.classList.add('bg-white/40');
+                }
+            });
+
+            // Re-trigger counter animation when stats slide becomes active
+            if (currentSlideIdx === 3) {
+                setTimeout(animateCounters, 200);
+            }
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            currentSlideIdx = (currentSlideIdx + 1) % slides.length;
+            updateCarouselUI();
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            currentSlideIdx = (currentSlideIdx - 1 + slides.length) % slides.length;
+            updateCarouselUI();
+        }
+
+        function setSlide(idx) {
+            currentSlideIdx = idx;
+            updateCarouselUI();
+            if (isCarouselPlaying) startCarouselTimer();
+        }
+
+        function toggleCarouselPlay() {
+            const playIcon = document.getElementById('carousel-play-icon');
+            if (isCarouselPlaying) {
+                clearInterval(carouselInterval);
+                playIcon.className = "fa-solid fa-play";
+                isCarouselPlaying = false;
+            } else {
+                startCarouselTimer();
+                playIcon.className = "fa-solid fa-pause";
+                isCarouselPlaying = true;
+            }
+        }
+
+        // --- 5. ACCORDION (INTERACTION) ---
+        function toggleAccordion(id) {
+            const content = document.getElementById(`${id}-content`);
+            const icon = document.getElementById(`${id}-icon`);
+            
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0px';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close other accordions
+                document.querySelectorAll('[id$="-content"]').forEach(el => el.style.maxHeight = '0px');
+                document.querySelectorAll('[id$="-icon"]').forEach(el => el.style.transform = 'rotate(0deg)');
+                
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // --- 6. INTERACTIVE MODALS LOGIC ---
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.children[0].classList.remove('scale-95');
+            modal.children[0].classList.add('scale-100');
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.children[0].classList.remove('scale-100');
+            modal.children[0].classList.add('scale-95');
+        }
+
+        function switchLoginTab(type) {
+            const btnUniv = document.getElementById('tab-univ');
+            const btnGen = document.getElementById('tab-general');
+            const formUniv = document.getElementById('form-univ');
+            const formGen = document.getElementById('form-general');
+
+            if (type === 'univ') {
+                btnUniv.className = "py-2.5 font-bold text-sm rounded-lg transition-all bg-white text-slate-900 shadow-sm";
+                btnGen.className = "py-2.5 font-bold text-sm rounded-lg transition-all text-slate-500 hover:text-slate-800";
+                formUniv.classList.remove('hidden');
+                formGen.classList.add('hidden');
+            } else {
+                btnGen.className = "py-2.5 font-bold text-sm rounded-lg transition-all bg-white text-slate-900 shadow-sm";
+                btnUniv.className = "py-2.5 font-bold text-sm rounded-lg transition-all text-slate-500 hover:text-slate-800";
+                formGen.classList.remove('hidden');
+                formUniv.classList.add('hidden');
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            showToast('LMS 시스템 로그인이 완벽히 처리되었습니다. 스마트 홈으로 이동합니다.', 'success');
+            closeLoginModal();
+        }
+
+        function handleApplyCourse(courseName) {
+            showToast(`'${courseName}' 수강신청 전송 절차가 시작되었습니다.`, 'success');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark text-2xl";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-2xl";
+            }
+        }
+
+        // --- 7. COUNTER ANIMATION ---
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const speed = 60; // speed threshold
+                
+                const updateCount = () => {
+                    const currentText = counter.innerText.replace(/,/g, '');
+                    const count = +currentText || 0;
+                    const inc = Math.ceil(target / speed);
+                    
+                    if (count < target) {
+                        counter.innerText = Math.min(count + inc, target).toLocaleString();
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                };
+                // Reset to 0 before starting to allow rerun animations
+                counter.innerText = "0";
+                updateCount();
+            });
+        }
+    </script>
+</body>
+</html>
